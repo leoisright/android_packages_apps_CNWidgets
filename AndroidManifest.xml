@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.classicnerd.widgets"
+    android:versionCode="1"
+    android:versionName="1.0"
+    >
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.SET_ORIENTATION" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.ACCESS_4G_RADIO_DISABLE" />
+    <uses-permission android:name="android.permission.ACCESS_4G_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_4G_STATE" />
+
+    <uses-sdk android:minSdkVersion="14" />
+
+    <application>
+		<!-- Wifi standalone widget -->
+        <receiver android:name=".WifiWidgetProvider"
+                android:label="@string/wifi_gadget_title"
+                android:icon="@drawable/icon_wifi">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+                <action android:name="com.classicnerd.widgets.WIFI_CLICKED"/>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_wifi_info" />
+        </receiver>
+		<!-- Sync standalone widget -->
+        <receiver android:name=".SyncWidgetProvider"
+                android:label="@string/sync_gadget_title"
+                android:icon="@drawable/icon_sync">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.classicnerd.widgets.SYNC_CLICKED"/>
+                 <action android:name="com.android.sync.SYNC_CONN_STATUS_CHANGED" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_sync_info" />
+        </receiver>
+        <!-- Mobile data toggle standalone widget -->
+        <receiver android:name=".MobileDataWidgetProvider"
+                android:label="@string/mobile_data_gadget_title"
+                android:enabled="@bool/config_has_mobile_data"
+                android:icon="@drawable/icon_mobile_data">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.classicnerd.widgets.MOBILE_DATA_CLICKED"/>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_mobile_data_info" />
+        </receiver>
+        <!-- Auto Rotate standalone widget -->
+        <receiver android:name=".AutoRotateWidgetProvider"
+                android:label="@string/auto_rotate_gadget_title"
+                android:icon="@drawable/icon_auto_rotate">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.classicnerd.widgets.AUTOROTATE_CLICKED"/>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_auto_rotate_info" />
+        </receiver>
+		<!-- GPS standalone widget -->
+        <receiver android:name=".GpsWidgetProvider"
+                android:label="@string/gps_gadget_title"
+                android:enabled="@bool/config_has_gps"
+                android:icon="@drawable/icon_gps">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.classicnerd.widgets.GPS_CLICKED"/>
+                <action android:name="android.location.PROVIDERS_CHANGED" />
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_gps_info" />
+        </receiver>
+		<!-- Tether standalone widget -->
+        <receiver android:name=".WifiApWidgetProvider"
+                android:label="@string/wifiap_gadget_title"
+                android:icon="@drawable/icon_wifiap">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.net.wifi.WIFI_AP_STATE_CHANGED" />
+                <action android:name="com.classicnerd.widgets.WIFIAP_CLICKED"/>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_wifiap_info" />
+        </receiver>
+        	<!-- Airplane Mode standalone widget -->
+        <receiver android:name=".AirplaneModeWidgetProvider"
+                android:label="@string/airplane_gadget_title"
+                android:icon="@drawable/icon_airplane">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.classicnerd.widget.AIRPLANEMODE_CLICKED"/>
+                <action android:name="android.intent.action.AIRPLANE_MODE"/>
+
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_airplane_info" />
+        </receiver>
+		<!-- Bluetooth standalone widget -->
+        <receiver android:name=".BluetoothWidgetProvider"
+                android:label="@string/bluetooth_gadget_title"
+                android:enabled="@bool/config_has_bluetooth"
+                android:icon="@drawable/icon_bluetooth">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
+                <action android:name="com.classicnerd.widgets.BLUETOOTH_CLICKED"/>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_bluetooth_info"/>
+        </receiver>
+		<!-- Wimax standalone widget -->
+        <receiver android:name=".WimaxWidgetProvider"
+                android:label="@string/wimax_gadget_title"
+                android:enabled="@bool/config_has_wimax"
+                android:icon="@drawable/icon_wimax">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.net.fourG.NET_4G_STATE_CHANGED" />
+                <action android:name="com.htc.net.wimax.WIMAX_ENABLED_CHANGED" />
+                <action android:name="com.classicnerd.widgets.WIMAX_CLICKED"/>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_wimax_info"/>
+        </receiver>
+
+    </application>
+</manifest>
+
